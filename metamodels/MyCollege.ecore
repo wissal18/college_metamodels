@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="MyCollege" nsURI="platform;/resource/college/metamodels/MyCollege.ecore"
+    nsPrefix="MyCollege">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="College">
+    <eOperations name="creer" eType="#//College"/>
+    <eOperations name="modifier"/>
+    <eOperations name="afficher"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="siteWeb" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="departements" lowerBound="1"
+        upperBound="-1" eType="#//Departement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Departement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="nomUnique"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="nomUnique" value="Departement.allInstances()->one(d:Departement | d.nom=self.nom)"/>
+    </eAnnotations>
+    <eOperations name="creer" eType="#//Departement"/>
+    <eOperations name="modifier"/>
+    <eOperations name="afficher"/>
+    <eOperations name="getRapport"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nom" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enseignants" lowerBound="1"
+        upperBound="-1" eType="#//Enseignant" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="matieres" upperBound="-1"
+        eType="#//Matiere" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Personne">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="idUnique"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="idUnique" value="Personne.allInstances()->one(p:Personne | p.ID=self.ID)"/>
+    </eAnnotations>
+    <eOperations name="creer" eType="#//Personne"/>
+    <eOperations name="modifier"/>
+    <eOperations name="afficher"/>
+    <eOperations name="getRapport"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nom" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prenom" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="num_tel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Enseignant" eSuperTypes="#//Personne">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date_emploie" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grade" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enseigne" lowerBound="1"
+        eType="#//Matiere"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Etudiant" eSuperTypes="#//Personne">
+    <eOperations name="creer" eType="#//Matiere"/>
+    <eOperations name="getMoyenne"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filiere" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date_entree" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Matiere">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="codeUnique"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="codeUnique" value="Matiere.allInstances()->one(m:Matiere | m.code=self.code)"/>
+    </eAnnotations>
+    <eOperations name="creer" eType="#//Matiere"/>
+    <eOperations name="modifier"/>
+    <eOperations name="afficher"/>
+    <eOperations name="getPlan"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nom" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enseigne_par" lowerBound="1"
+        upperBound="-1" eType="#//Enseignant"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="etudiants" upperBound="-1"
+        eType="#//Etudiant" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>
